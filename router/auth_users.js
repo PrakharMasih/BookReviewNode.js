@@ -97,14 +97,14 @@ regd_users.delete("/auth/review/:isbn", (req, res) => {
   // Filter and delete the reviews based on the session username
   const filteredReviews = book.reviews.filter((review) => review.username === username);
 
-  // if (filteredReviews.length === book.reviews.length) {
-  //   // No reviews were deleted
-  //   return res.status(404).json({ message: "Review not found" });
-  // } else {
+  if (filteredReviews.length === book.reviews.length) {
+    // No reviews were deleted
+    return res.status(404).json({ message: "Review not found" });
+  } else {
     // Update the book reviews with the filtered reviews
     book.reviews = filteredReviews;
     return res.status(200).json({ message: "Review deleted successfully" });
-  // }
+  }
 });
 
 module.exports.authenticated = regd_users;
